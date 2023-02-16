@@ -36,7 +36,7 @@ public class testPlayerMove : MonoBehaviour
         {
             Debug.Log($"A is pushed");
             animator.SetBool("isRun", true);
-            this.gameObject.transform.parent.Translate(moveKey.left_move);
+            this.gameObject.transform.Translate(moveKey.left_move);
         }
         //â°ç∂Ç™ó£ÇÍÇΩÇÁ
         if (Input.GetKeyUp(parasKey.left_move))
@@ -50,7 +50,7 @@ public class testPlayerMove : MonoBehaviour
         {
             Debug.Log($"D is pushed");
             animator.SetBool("isRun", true);
-            this.gameObject.transform.parent.Translate(moveKey.right_move);
+            this.gameObject.transform.Translate(moveKey.right_move);
         }
         //â°âEÇ™ó£ÇÍÇΩÇÁ
         if (Input.GetKeyUp(parasKey.right_move))
@@ -64,7 +64,7 @@ public class testPlayerMove : MonoBehaviour
         {
             Debug.Log($"W is pushed");
             animator.SetBool("isRun", true);
-            this.gameObject.transform.parent.Translate(moveKey.up_move);
+            this.gameObject.transform.Translate(moveKey.up_move);
         }
         //ëOÇ™ó£ÇÍÇΩÇÁ
         if (Input.GetKeyUp(parasKey.up_move))
@@ -78,7 +78,7 @@ public class testPlayerMove : MonoBehaviour
         {
             Debug.Log($"S is pushed");
             animator.SetBool("isRun", true);
-            this.gameObject.transform.parent.Translate(moveKey.down_move);
+            this.gameObject.transform.Translate(moveKey.down_move);
         }
         //å„ÇÎÇ™ó£ÇÍÇΩÇÁ
         if (Input.GetKeyUp(parasKey.down_move))
