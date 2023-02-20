@@ -5,21 +5,25 @@ using UnityEngine;
 public class SphreDrop : MonoBehaviour
 {
     public GameObject target;
-
+    private GameObject player;
+    void Start()
+    {
+        player = GameObject.FindWithTag("Player");
+    }
     void Update()
     {
-        Vector3 cube = target.transform.position;
+        Vector3 cube = player.transform.position;
         float dis = Vector3.Distance(cube, this.transform.position);
 
         if (dis < 2.6f)
         {
-            SphereGravity();
+            itemPick();
         }
     }
-
-    void SphereGravity()
+    void itemPick()
     {
-        GetComponent<Rigidbody>().useGravity = true;
-        Debug.Log($"In distance");
+
+        Debug.Log("Picked");
+        Destroy(this.gameObject);
     }
 }

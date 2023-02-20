@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Item : MonoBehaviour
+public class Itemtest : MonoBehaviour
 {
     public UnityEvent onPickUp;
     private GameObject player;
@@ -26,7 +26,7 @@ public class Item : MonoBehaviour
     {
         Debug.Log("Picked");
         //onPickUp.Invoke();
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
     }
     public void OnTriggerEnter(Collider collidar)
     {
@@ -36,7 +36,6 @@ public class Item : MonoBehaviour
             inArea = true;
 
         }
-
     }
     public void OnTriggerExit(Collider collidar)
     {
