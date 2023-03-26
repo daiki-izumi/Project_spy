@@ -22,10 +22,10 @@ namespace Moveparas
         public Vector3 crouch;
         public MoveParameter()
         {
-            left_move = new Vector3(-0.002f, 0f, 0f);
-            up_move = new Vector3(0f, 0f, 0.004f);
-            right_move = new Vector3(0.002f, 0f, 0f);
-            down_move = new Vector3(0f, 0f, -0.002f);
+            left_move = new Vector3(-2f, 0f, 0f);
+            up_move = new Vector3(0f, 0f, 4f);
+            right_move = new Vector3(2f, 0f, 0f);
+            down_move = new Vector3(0f, 0f, -2f);
             crouch = new Vector3(0f, 0f, 0f);
             
         }

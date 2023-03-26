@@ -16,12 +16,14 @@ public  class ItemObject : ScriptableObject
     public int ItemID;
     //アイテムのPrefab
     public GameObject prefab;
-    //
+    //アイテムの種類
     public ItemType type;
     //アイコンサムネ
     public Sprite Icon;
     //最大積載量
     public int MaxStackSize;
+    //レア度
+    public int RareValue;
     [TextArea(15, 20)]
     public string Description;
 }

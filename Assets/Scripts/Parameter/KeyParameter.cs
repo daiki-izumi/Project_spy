@@ -24,6 +24,10 @@ namespace Keyparas
         public UnityEngine.KeyCode crouch;
         //PickUp
         public UnityEngine.KeyCode pickup;
+        //Drop
+        public UnityEngine.KeyCode drop;
+        //Open Inventory
+        public UnityEngine.KeyCode opcl;
         public KeyParameter()
         {
             if (File.Exists(path))
@@ -43,6 +47,8 @@ namespace Keyparas
                 down_move = KeyCode.S;
                 crouch = KeyCode.LeftControl;
                 pickup = KeyCode.E;
+                drop = KeyCode.Q;
+                opcl = KeyCode.Tab;
             }
         }
     }

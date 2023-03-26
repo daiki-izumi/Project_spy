@@ -12,7 +12,7 @@ public class ItemSystem
     [SerializeField] private int amountSize;
     //=====プロパティ=====
     //ItemObject
-    public ItemObject Itemobject => itemObject;
+    public ItemObject ItemObject => itemObject;
     //今持っている数
     public int Amountsize => amountSize;
     //=====が=====
@@ -20,6 +20,11 @@ public class ItemSystem
     {
         itemObject = source;
         amountSize = amount;
+    }
+    public ItemSystem(ItemObject source)
+    {
+        itemObject = source;
+        amountSize = 999999999;
     }
     //=====インベントリが空の状態=====
     public ItemSystem()
@@ -30,6 +35,12 @@ public class ItemSystem
     {
         itemObject = null;
         amountSize = -1;
+    }
+    //=====アイテムの直接操作=====
+    public void UpdateInventorySlot(ItemObject data, int amount)
+    {
+        itemObject = data;
+        amountSize = amount;
     }
     //=====アイテムの追加=====
     public bool RoomLeftInStack(int amountToAdd, out int amountRoom)
@@ -49,6 +60,7 @@ public class ItemSystem
             return false;
         }
     }
+    //アイテムの追加
     public void AddToStack(int amount)
     {
         amountSize += amount;
@@ -57,5 +69,20 @@ public class ItemSystem
     public void RemoveToStack(int amount)
     {
         amountSize -= amount;
+        if (amountSize <= 0)
+        {
+            ClearItemSystem();
+        }
     }
+    //=====アイテムの代入=====
+    public void AssignItem(ItemSystem invSlot)
+    {
+        if (itemObject == invSlot.ItemObject) AddToStack(invSlot.amountSize);
+        else { 
+            itemObject = invSlot.itemObject;
+            amountSize = 0; 
+            AddToStack(invSlot.amountSize); 
+        }
+    }
+
 }

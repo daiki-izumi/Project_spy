@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Keyparas;
 using Moveparas;
+using inventory;
 
 public class testPlayerMove : MonoBehaviour
 {
@@ -17,6 +18,15 @@ public class testPlayerMove : MonoBehaviour
     private Vector3 _prePosition;
     //このオブジェクトのトランスフォーム
     private Transform _transform;
+    //アイテム取得フラグ
+    private bool isItem;
+    //取得したアイテム情報
+    private ItemObject itemObject;
+    // 最大の回転角速度[deg/s]
+    [SerializeField] private float _maxAngularSpeed = Mathf.Infinity;
+    // 進行方向に向くのにかかるおおよその時間[s]
+    [SerializeField] private float _smoothTime = 0.1f;
+    private float _currentAngularVelocity;
     //=====初期処理=====
     void Start()
     {
@@ -36,6 +46,8 @@ public class testPlayerMove : MonoBehaviour
         _prePosition = _transform.position;
         //_prePosition = this.gameObject.transform.GetComponent<Transform>().position;
         //transformThis.positon;
+        //アイテム取得フラグ
+        isItem = false;
     }
 
     //=====主処理=====
@@ -43,9 +55,8 @@ public class testPlayerMove : MonoBehaviour
     {
         //Vector3 delta = this.gameObject.transform.GetComponent<Transform>().position - _prePosition;
         //_prePosition = this.gameObject.transform.GetComponent<Transform>().position;
-        var position = _transform.position;
-        var delta = position - _prePosition;
-        _prePosition = position;
+        //var position = _transform.position;
+        //_prePosition = position;
         //-----横左-----
         //横左が押されたら
         if (Input.GetKey(parasKey.left_move))
@@ -119,23 +130,63 @@ public class testPlayerMove : MonoBehaviour
         {
             Debug.Log($"E is pushed");
             animator.SetBool("isPickUp", true);
+            isItem = true;
         }
         //後ろが離れたら
         if (Input.GetKeyUp(parasKey.pickup))
         {
             Debug.Log($"E is not pushed");
             animator.SetBool("isPickUp", false);
+            isItem = false;
         }
-        //_prePosition = _nowPosition;
-        /*if (delta.magnitude > 0.01f)
+        var position = _transform.position;
+        var delta = position - _prePosition;
+        _prePosition = position;
+        /*
+        if (delta.magnitude > 0.003f)
         {
-            transform.rotation = Quaternion.LookRotation(delta, Vector3.up);
+            transform.rotation = Quaternion.LookRotation(delta);
         }*/
         if (delta == Vector3.zero)
-        {
             return;
-        }
-        var rotation = Quaternion.LookRotation(delta, Vector3.up);
+        var targetRot = Quaternion.LookRotation(delta, Vector3.up);
+        var diffAngle = Vector3.Angle(_transform.forward, delta);
+        var rotAngle = Mathf.SmoothDampAngle(
+            0,
+            diffAngle,
+            ref _currentAngularVelocity,
+            _smoothTime,
+            _maxAngularSpeed
+        );
+        // 現在フレームにおける回転を計算
+        var nextRot = Quaternion.RotateTowards(
+            _transform.rotation,
+            targetRot,
+            rotAngle
+        );
+
+        // オブジェクトの回転に反映
+        _transform.rotation = nextRot;
         //_transform.rotation = rotation;
+    }
+    void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Item") && isItem)
+        {
+            Debug.Log($"すり抜けてる！");
+            Debug.Log($"取得ボタンがされてない{isItem}");
+            if (isItem)
+            {
+                Debug.Log($"アイテム取得フラグ true {other.gameObject.GetType()}");
+                var item = other.transform.GetComponent<ItemPickUp>();
+                var inventory = this.transform.GetComponent<InventoryHolder>();
+                if (!inventory) return;
+                if (inventory.PrimaryInventorySystem.AddToInventorySystem(item.itemObject, 1))
+                {
+                    Destroy(other.gameObject);
+                }
+            }
+
+        }
     }
 }

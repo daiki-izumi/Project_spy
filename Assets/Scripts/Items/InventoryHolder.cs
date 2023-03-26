@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[System.Serializable]
-public class InventoryHolder : MonoBehaviour
+namespace inventory
 {
-    //=====•Ï”‚ÌéŒ¾=====
-    //ItemObject
-    [SerializeField] private int inventorySize;
-    [SerializeField] protected InventorySystem inventorySystem;
-    public InventorySystem InventorySystem => inventorySystem;
-    public static UnityAction<InventorySystem> OnInventorySystemRequested;
-    private void Awake()
+    [System.Serializable]
+    public class InventoryHolder : MonoBehaviour
     {
-        inventorySystem = new InventorySystem(inventorySize);
-    }
+        //=====•Ï”‚ÌéŒ¾=====
+        //ItemObject
+        [SerializeField] private int inventorySize;
+        [SerializeField] protected InventorySystem primaryInventorySystem;
+        public InventorySystem PrimaryInventorySystem => primaryInventorySystem;
+        public static UnityAction<InventorySystem> OnInventorySystemRequested;
+        protected virtual void Awake()
+        {
+            primaryInventorySystem = new InventorySystem(inventorySize);
+        }
 
+    }
 }
+

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using inventory;
 
 public class ItemPickUp : MonoBehaviour
 {
@@ -16,10 +17,10 @@ public class ItemPickUp : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        var inventory = other.transform.GetComponent<InventoryHolder>();
+        var inventory = other.transform.GetComponent<PlayerInventoryHolder>();
         Debug.Log($"ÉAÉCÉeÉÄÇ…êGÇÍÇΩÇÊ, {inventory}");
         if (!inventory) return;
-        if (inventory.InventorySystem.AddToInventorySystem(itemObject, 1))
+        if (inventory.AddToInventorySystem(itemObject, 1))
         {
             Destroy(this.gameObject);
         }
