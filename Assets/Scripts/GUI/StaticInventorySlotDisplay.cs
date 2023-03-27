@@ -11,7 +11,7 @@ public class StaticInventorySlotDisplay : InventorySlotDisplay
     //キー配置のクラス
     KeyParameter parasKey;
     [SerializeField] private InventoryHolder inventoryHolder;
-    public InventorySlotUI [] slots;
+    [SerializeField] protected InventorySlotUI [] slots;
     protected override void Start()
     {
         //キー配置の読み込み

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class ItemSystem
+public class ItemSystem : ItemSlot
 {
+    /*
     //=====変数の宣言=====
     //ItemObject
     [SerializeField] private ItemObject itemObject;
@@ -14,7 +15,7 @@ public class ItemSystem
     //ItemObject
     public ItemObject ItemObject => itemObject;
     //今持っている数
-    public int Amountsize => amountSize;
+    public int Amountsize => amountSize;*/
     //=====が=====
     public ItemSystem(ItemObject source, int amount)
     {
@@ -31,11 +32,11 @@ public class ItemSystem
     {
         ClearItemSystem();
     }
-    public void ClearItemSystem()
+    /*public void ClearItemSystem()
     {
         itemObject = null;
         amountSize = -1;
-    }
+    }*/
     //=====アイテムの直接操作=====
     public void UpdateInventorySlot(ItemObject data, int amount)
     {
@@ -60,6 +61,7 @@ public class ItemSystem
             return false;
         }
     }
+    /*
     //アイテムの追加
     public void AddToStack(int amount)
     {
@@ -73,8 +75,9 @@ public class ItemSystem
         {
             ClearItemSystem();
         }
-    }
+    }*/
     //=====アイテムの代入=====
+    /*
     public void AssignItem(ItemSystem invSlot)
     {
         if (itemObject == invSlot.ItemObject) AddToStack(invSlot.amountSize);
@@ -83,6 +86,6 @@ public class ItemSystem
             amountSize = 0; 
             AddToStack(invSlot.amountSize); 
         }
-    }
+    }*/
 
 }

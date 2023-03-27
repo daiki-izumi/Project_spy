@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Keyparas;
 
-public class Interactor : MonoBehaviour
+public class Interactor : PlayerMove
 {
     //=====定義領域=====
     //キー配置のクラス
