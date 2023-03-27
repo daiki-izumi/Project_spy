@@ -35,6 +35,7 @@ public class MouseItemData : MonoBehaviour
     }
     private void Update()
     {
+        /*
         if (AssignedInventorySlot.ItemObject != null)
         {
             this.transform.position = Mouse.current.position.ReadValue(); //Input.mousePosition;
@@ -51,7 +52,7 @@ public class MouseItemData : MonoBehaviour
                 }
                 ClearSlot();
             }
-        }
+        }*/
         /*if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             Debug.Log("Left Button is Clicked");

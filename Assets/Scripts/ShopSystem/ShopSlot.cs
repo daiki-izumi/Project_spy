@@ -7,6 +7,6 @@ public class ShopSlot : ItemSlot
 {
     public ShopSlot()
     {
-        ClearSlot();
+        //ClearSlot();
     }
 }

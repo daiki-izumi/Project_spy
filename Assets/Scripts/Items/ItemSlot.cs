@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ItemSlot : MonoBehavior
+public abstract class ItemSlot : MonoBehaviour
 {
     //=====変数の宣言=====
     //ItemObject

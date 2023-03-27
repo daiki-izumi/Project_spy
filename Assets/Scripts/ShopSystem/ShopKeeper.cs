@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ShopKeeper: MonoBehavior, IInteractable
+public class ShopKeeper: MonoBehaviour, IInteractable
 {
 	[SerializeField] private ShopItemList _shopItemsHeld;
 	[SerializeField] private ShopSystem _shopSystem;
+
+	public UnityAction<IInteractable> OnInteractionComplete { get; set; }
 
 	private void Awake()
     {
@@ -17,14 +19,12 @@ public class ShopKeeper: MonoBehavior, IInteractable
         }
     }
 
-	public UnityAction<IInteractable> OnInteractionComplete { get; set; }
-
 	public void Interact(Interactor interactor, out bool interactSuccessful)
     {
 		throw new System.NotImplementedException();
     }
 
-	public void EndInteraction(Interactor interactor, out bool interactSuccessful)
+	public void EndInteraction()
 	{
 		throw new System.NotImplementedException();
 	}
