@@ -34,20 +34,29 @@ public class InventoryUIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.Escape)) {
-            Debug.Log("Escape");
-            DisplayInventory(new InventorySystem(20));
-        }*/
-        //アクティブになったら
-        if (chestPanel.gameObject.activeInHierarchy && Input.GetKeyDown(KeyCode.Escape))
-            chestPanel.gameObject.SetActive(false);
+        //チェストがアクティブになったら&Escapeが押されたら
+        if (chestPanel.gameObject.activeInHierarchy) 
+        {
+            DisplayInventory();
+            if (Input.GetKeyDown(KeyCode.Escape)) chestPanel.gameObject.SetActive(false);
+        }
+        //インベントリがアクティブになったら&Escapeが押されたら
         if (playerBackpackPanel.gameObject.activeInHierarchy && Input.GetKeyDown(KeyCode.Escape))
+        { 
             playerBackpackPanel.gameObject.SetActive(false);
+            //プレイヤーの移動を止める
+            PlayerMove.IsAllowMove?.Invoke(true);
+        }
     }
     void DisplayInventory(InventorySystem invToDisplay)
     {
         chestPanel.gameObject.SetActive(true);
         chestPanel.RefreshDynamicInventory(invToDisplay);
+    }
+    void DisplayInventory()
+    {
+        chestPanel.gameObject.SetActive(true);
+        //chestPanel.RefreshDynamicInventory(SecondaryInventorySystem);
     }
     void DisplayPlayerBackpack(InventorySystem invToDisplay)
     {
